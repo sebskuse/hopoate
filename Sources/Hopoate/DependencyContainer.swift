@@ -13,7 +13,7 @@ public final class DependencyContainer {
     private var serviceProviderRegistrars = [ServiceProviderRegistrar]()
     
     public static let shared = DependencyContainer()
-    
+
     public init() {}
     
     /// Registers a creation closure for a given service type.

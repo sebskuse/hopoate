@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import Hopoate
+
+#if canImport(XCTest)
 
 /// Encapsulates registration of a given mock against a protocol
 /// in the DI container. Registration / removal follows the
@@ -32,3 +33,4 @@ public class MockContainer<Type, Mock> {
         DependencyContainer.shared.remove(registration)
     }
 }
+#endif
