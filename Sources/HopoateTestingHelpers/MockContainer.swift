@@ -9,6 +9,9 @@
 import Foundation
 import Hopoate
 
+/// The container to use for dependencies in tests.
+public var TestMockContainer: DependencyContainer = .shared
+
 /// Encapsulates registration of a given mock against a protocol
 /// in the DI container. Registration / removal follows the
 /// object lifecycle - initialisation will register the mock, and
@@ -23,12 +26,12 @@ public class MockContainer<Type, Mock> {
     public init(_ mock: Type) {
         // swiftlint:disable:next force_cast If your Mock doesn't conform to Type you're going to have a bad time
         self.mock = mock as! Mock
-        registration = DependencyContainer.shared.register(service: Type.self) {
+        registration = TestMockContainer.register(service: Type.self) {
             mock
         }
     }
 
     deinit {
-        DependencyContainer.shared.remove(registration)
+        TestMockContainer.remove(registration)
     }
 }
